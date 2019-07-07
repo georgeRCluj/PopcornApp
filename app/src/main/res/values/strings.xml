@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">PopcornApp</string>
+
+    <!--Splash Screen Activity -->
+    <string name="activity_splash_screen_description">Splash Screen</string>
+    <string name="activity_splash_screen_image_description">Splash Screen Image</string>
 </resources>
