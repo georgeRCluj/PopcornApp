@@ -7,6 +7,7 @@ import androidx.annotation.Nullable;
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.movie.popcornapp.activities.searchmovie.SearchMovieDataModel;
 import com.movie.popcornapp.activities.searchmovie.SearchMovieViewModel;
 import com.movie.popcornapp.activities.searchmovie.SearchMoviesTasksRepository;
 
@@ -18,17 +19,21 @@ public class ViewModelFactory extends ViewModelProvider.NewInstanceFactory {
 
     //region Properties
     private Object tasksRepository;
+
+    @Nullable
+    private Object data;
     //endregion;
 
-    public ViewModelFactory(@Nullable Object tasksRepository) {
+    public ViewModelFactory(@Nullable Object tasksRepository, @Nullable Object data) {
         this.tasksRepository = tasksRepository;
+        this.data = data;
     }
 
     @NonNull
     @Override
     public <T extends ViewModel> T create(@NonNull Class<T> modelClass) {
         if (modelClass.getSimpleName().equals(SearchMovieViewModel.class.getSimpleName())) {
-            return (T) new SearchMovieViewModel((SearchMoviesTasksRepository) tasksRepository);
+            return (T) new SearchMovieViewModel((SearchMoviesTasksRepository) tasksRepository, (SearchMovieDataModel) data);
         }
 
         throw new Resources.NotFoundException("ViewModelFactory.create should not reach this point");

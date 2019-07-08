@@ -10,9 +10,14 @@
     <string name="activity_search_movie_search_image_description">Search image</string>
     <string name="activity_search_movie_find">Find\u0020</string>
     <string name="activity_search_movie_the_movie">the movie</string>
-    <string name="trending_movies">Trending movies</string>
+    <string name="activity_search_movie_trending_movies">Trending movies</string>
+    <string name="activity_search_movie_please_type_a_movie_title">Please type a movie title</string>
+    <string name="activity_search_movie_no_movie_found">No movie found with this title</string>
 
     <!--General Strings-->
+    <string name="loading_progress_dialog_message_please_wait">Please wait. Loading&#8230;</string>
     <string name="no_internet_connection_dialog_message">Please check your internet connection and try again</string>
     <string name="dialog_general_error_response_message">Error. Please try again later</string>
+    <string name="dialog_positive_button">OK</string>
+    <string name="dialog_title_warning">Info</string>
 </resources>

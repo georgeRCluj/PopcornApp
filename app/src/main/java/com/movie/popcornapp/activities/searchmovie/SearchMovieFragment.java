@@ -11,12 +11,17 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.movie.popcornapp.R;
+import com.movie.popcornapp.components.LoadingCommandAndMessage;
 import com.movie.popcornapp.databinding.FragmentSearchMovieBinding;
+import com.movie.popcornapp.extensions.CustomAlertDialog;
 import com.movie.popcornapp.extensions.KeyboardUtils;
+import com.movie.popcornapp.extensions.LoadingProgressDialog;
+import com.movie.popcornapp.extensions.StringUtils;
 import com.movie.popcornapp.infrastructure.factories.ViewModelFactory;
 import com.movie.popcornapp.workers.searchmovies.SearchMoviesWorker;
 
@@ -30,6 +35,8 @@ public class SearchMovieFragment extends Fragment {
     //region Properties
     private FragmentSearchMovieBinding binding;
     private SearchMovieViewModel viewModel;
+    private LoadingProgressDialog loadingProgressDialog;
+    private CustomAlertDialog customAlertDialog;
     //endregion
 
     //region Lifecycle
@@ -51,6 +58,9 @@ public class SearchMovieFragment extends Fragment {
         //Adjust edit field behavior
         adjustSearchField();
 
+        //Create Loading Progress Dialog
+        loadingProgressDialog = new LoadingProgressDialog(getActivity());
+
         // Populate carousel list & load carousel on UI
         ArrayList<Integer> moviesList = new ArrayList<>();
         moviesList.add(R.drawable.solo_star_wars);
@@ -71,9 +81,15 @@ public class SearchMovieFragment extends Fragment {
         SearchMoviesTasksRepository searchMoviesTasksRepository = new SearchMoviesTasksRepository(searchMoviesWorker);
 
         //ViewModel
-        viewModel = ViewModelProviders.of(this, new ViewModelFactory(searchMoviesTasksRepository)).get(SearchMovieViewModel.class);
+        SearchMovieDataModel searchMovieDataModel = new SearchMovieDataModel(
+                getResources().getString(R.string.activity_search_movie_please_type_a_movie_title),
+                getResources().getString(R.string.activity_search_movie_no_movie_found)
+        );
+        viewModel = ViewModelProviders.of(this, new ViewModelFactory(searchMoviesTasksRepository, searchMovieDataModel)).get(SearchMovieViewModel.class);
         binding.setViewModel(viewModel);
 
+        //Setup observers
+        setupObservers();
     }
     //endregion
 
@@ -108,6 +124,64 @@ public class SearchMovieFragment extends Fragment {
             public void afterTextChanged(Editable s) {
             }
         });
+    }
+    //endregion
+
+    //region Observers
+    private void setupObservers() {
+
+        // loading (progress dialogs)
+        viewModel.loadingCommands.removeObservers(this);
+        Observer<LoadingCommandAndMessage> loadingCommandAndMessageObserver = ((@Nullable LoadingCommandAndMessage loadingCommand) -> {
+            if (loadingCommand != null) {
+                switch (loadingCommand.command) {
+                    case show:
+                        loadingProgressDialog.show(getString(R.string.loading_progress_dialog_message_please_wait));
+                        break;
+
+                    case hide:
+                        loadingProgressDialog.dismiss();
+                        break;
+                }
+            }
+        });
+        viewModel.loadingCommands.observe(this, loadingCommandAndMessageObserver);
+
+        // error dialogs
+        viewModel.errorDialogCommand.removeObservers(this);
+        Observer<String> displayErrorMessageObserver = ((@Nullable String displayErrorMessage) -> {
+            if (!StringUtils.isEmpty(displayErrorMessage)) {
+                if (customAlertDialog != null) {
+                    customAlertDialog.dismiss();
+                }
+                customAlertDialog = new CustomAlertDialog(
+                        getActivity(),
+                        getString(R.string.dialog_title_warning),
+                        android.R.attr.alertDialogIcon,
+                        () -> customAlertDialog.dismiss()
+                );
+                customAlertDialog.showAlert(displayErrorMessage);
+            }
+        });
+        viewModel.errorDialogCommand.observe(this, displayErrorMessageObserver);
+
+        // validation
+        viewModel.validationErrorDialogCommand.removeObservers(this);
+        Observer<String> displayErrorMessageResourceIdObserver = ((@Nullable String displayErrorMessage) -> {
+            if (displayErrorMessage != null) {
+                if (customAlertDialog != null) {
+                    customAlertDialog.dismiss();
+                }
+                customAlertDialog = new CustomAlertDialog(
+                        getActivity(),
+                        getString(R.string.dialog_title_warning),
+                        android.R.attr.alertDialogIcon,
+                        () -> customAlertDialog.dismiss()
+                );
+                customAlertDialog.showAlert(displayErrorMessage);
+            }
+        });
+        viewModel.validationErrorDialogCommand.observe(this, displayErrorMessageResourceIdObserver);
     }
     //endregion
 }

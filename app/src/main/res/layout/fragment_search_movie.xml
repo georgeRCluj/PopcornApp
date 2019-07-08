@@ -114,6 +114,7 @@
                     android:layout_weight="1"
                     android:background="@android:color/transparent"
                     android:paddingRight="10dp"
+                    android:text="@={viewModel.movieEditText}"
                     android:singleLine="true"
                     android:textColor="@color/colorBlack"
                     android:textSize="@dimen/text_size_very_large" />
@@ -125,7 +126,9 @@
                     android:layout_gravity="center"
                     android:layout_marginLeft="5dp"
                     android:layout_marginEnd="@dimen/margins_left_right_text_input"
+                    android:background="?android:attr/selectableItemBackgroundBorderless"
                     android:clickable="true"
+                    android:onClick="@{view -> viewModel.searchForMovie()}"
                     android:contentDescription="@string/activity_search_movie_search_image_description"
                     android:focusable="true"
                     android:src="@drawable/search" />
@@ -171,7 +174,7 @@
                 android:layout_marginStart="@dimen/margins_left_right_text_input"
                 android:layout_marginBottom="8dp"
                 android:fontFamily="@font/lato_black"
-                android:text="@string/trending_movies"
+                android:text="@string/activity_search_movie_trending_movies"
                 android:textColor="@color/colorBlack"
                 android:textSize="@dimen/text_size_medium"
                 app:layout_constraintBottom_toTopOf="@+id/trendingMoviesRecyclerView"
