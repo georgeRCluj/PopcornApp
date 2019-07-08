@@ -1,7 +1,14 @@
 <resources>
     <string name="app_name">PopcornApp</string>
 
-    <!--Splash Screen Activity -->
+    <!-- Splash Screen Activity -->
     <string name="activity_splash_screen_description">Splash Screen</string>
     <string name="activity_splash_screen_image_description">Splash Screen Image</string>
+
+    <!-- Search Movie Activity -->
+    <string name="activity_search_movie_popcorn_image_description">Popcorn image</string>
+    <string name="activity_search_movie_search_image_description">Search image</string>
+    <string name="activity_search_movie_find">Find\u0020</string>
+    <string name="activity_search_movie_the_movie">the movie</string>
+    <string name="trending_movies">Trending movies</string>
 </resources>

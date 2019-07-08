@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Text dimensions -->
+    <dimen name="text_size_very_large">35sp</dimen>
+    <dimen name="text_size_large">25sp</dimen>
+    <dimen name="text_size_medium">20sp</dimen>
+
+    <!-- Margins and paddings -->
+    <dimen name="margins_left_right_text_input">25dp</dimen>
+
+
+</resources>
