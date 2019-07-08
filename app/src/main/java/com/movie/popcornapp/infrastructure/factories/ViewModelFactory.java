@@ -7,11 +7,13 @@ import androidx.annotation.Nullable;
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.movie.popcornapp.activities.moviedetails.MovieDetailsViewModel;
 import com.movie.popcornapp.activities.movieslist.MoviesListDataModel;
 import com.movie.popcornapp.activities.movieslist.MoviesListViewModel;
 import com.movie.popcornapp.activities.searchmovie.SearchMovieDataModel;
 import com.movie.popcornapp.activities.searchmovie.SearchMovieViewModel;
 import com.movie.popcornapp.activities.searchmovie.SearchMoviesTasksRepository;
+import com.movie.popcornapp.models.API.response.MovieResponse;
 
 /**
  * @author george.radu on 2019-07-07.
@@ -40,6 +42,10 @@ public class ViewModelFactory extends ViewModelProvider.NewInstanceFactory {
 
         if (modelClass.getSimpleName().equals(MoviesListViewModel.class.getSimpleName())) {
             return (T) new MoviesListViewModel((MoviesListDataModel) data);
+        }
+
+        if (modelClass.getSimpleName().equals(MovieDetailsViewModel.class.getSimpleName())) {
+            return (T) new MovieDetailsViewModel((MovieResponse) data);
         }
 
         throw new Resources.NotFoundException("ViewModelFactory.create should not reach this point");

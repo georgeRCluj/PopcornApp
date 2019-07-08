@@ -6,10 +6,7 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.movie.popcornapp.components.LoadingCommandAndMessage;
-import com.movie.popcornapp.models.API.response.MovieResponse;
 import com.movie.popcornapp.models.API.response.SearchMoviesResponse;
-
-import java.util.List;
 
 /**
  * @author george.radu on 2019-07-08.

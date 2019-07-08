@@ -25,7 +25,9 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
             buildConfigField 'String', 'Endpoint', '"https://api.themoviedb.org"'
             buildConfigField 'String', 'TheMovieDBApiKey', '"d34b703c1b948da28c1c4eed006b1256"'
-            buildConfigField 'String', 'TheMovieDBPosteW185', '"http://image.tmdb.org/t/p/w185/"'
+            buildConfigField 'String', 'TheMovieDBPosterW185', '"http://image.tmdb.org/t/p/w185/"'
+            buildConfigField 'String', 'TheMovieDBPosterW500', '"http://image.tmdb.org/t/p/w500/"'
+            //possible resolutions: "w92", "w154", "w185", "w342", "w500", "w780"
         }
     }
 

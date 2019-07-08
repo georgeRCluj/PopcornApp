@@ -19,25 +19,38 @@ public class MoviesListViewModel extends ViewModel implements MoviesListItemView
     //region Observables
     public ObservableField<String> searchText = new ObservableField<>();
     public MutableLiveData<List<MoviesListItemViewModel>> movies = new MutableLiveData<>();
-
     //endregion;
+
+    //region Selection commands
+    public MutableLiveData<MoviesListItemViewModel> selectedItem = new MutableLiveData<>();
+    //endregion
 
     public MoviesListViewModel(MoviesListDataModel moviesListDataModel) {
         this.moviesListDataModel = moviesListDataModel;
         setTitle();
-        loadMovies();
-
+        loadFilteredMovies();
     }
 
     private void setTitle() {
         searchText.set(moviesListDataModel.getSearchText());
     }
 
-    private void loadMovies() {
+    private void loadFilteredMovies() {
+        // there are movies with no poster or no release date; we filter them out
         List<MoviesListItemViewModel> list = new ArrayList<>();
         for (MovieResponse movie : moviesListDataModel.getMoviesList()) {
             if (movie.getReleaseDate().length() > 0 && movie.getPosterPath() != null) {
-                list.add(new MoviesListItemViewModel(movie.getId(), movie.getPosterPath(), movie.getTitle(), movie.getReleaseYear(), movie.getAverageRating(), movie.getVoteCount(), this));
+                list.add(new MoviesListItemViewModel(
+                        movie.getId(),
+                        movie.getPosterPath(),
+                        movie.getBackdropPath(),
+                        movie.getTitle(),
+                        movie.getReleaseDate(),
+                        movie.getReleaseYear(),
+                        movie.getAverageRating(),
+                        movie.getVoteCount(),
+                        movie.getOverview(),
+                        this));
             }
         }
         movies.postValue(list);
@@ -45,6 +58,6 @@ public class MoviesListViewModel extends ViewModel implements MoviesListItemView
 
     @Override
     public void itemSelected(MoviesListItemViewModel movieItemSelected) {
-
+        selectedItem.postValue(movieItemSelected);
     }
 }

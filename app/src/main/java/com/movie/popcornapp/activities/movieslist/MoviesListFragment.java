@@ -15,11 +15,9 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.movie.popcornapp.R;
-import com.movie.popcornapp.activities.searchmovie.SearchMovieViewModel;
 import com.movie.popcornapp.databinding.FragmentMoviesListBinding;
 import com.movie.popcornapp.infrastructure.factories.ViewModelFactory;
 import com.movie.popcornapp.models.API.response.MovieResponse;
-import com.movie.popcornapp.models.API.response.SearchMoviesResponse;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,7 +30,7 @@ public class MoviesListFragment extends Fragment {
      * OnSearchMovieFragmentInteractionListener
      */
     public interface OnMoviesListFragmentInteractionListener {
-        void onGoToDetailsList(String searchText, MovieResponse movieResponse);
+        void onGoToMovieDetails(MoviesListItemViewModel movieResponse);
     }
 
     //region Properties
@@ -49,8 +47,8 @@ public class MoviesListFragment extends Fragment {
     static MoviesListFragment newInstance(String searchText, List<MovieResponse> loadedMovies) {
         MoviesListFragment fragment = new MoviesListFragment();
         Bundle args = new Bundle();
-        args.putString(MoviesListActivity.MOVIES_LIST_SEARCH_TEXT_KEY, searchText);
-        args.putParcelableArrayList(MoviesListActivity.MOVIES_LIST_MOVIES_KEY, (ArrayList<? extends Parcelable>) loadedMovies);
+        args.putString(MoviesListActivity.MOVIES_LIST_FRAGMENT_SEARCH_TEXT_KEY, searchText);
+        args.putParcelableArrayList(MoviesListActivity.MOVIES_LIST_FRAGMENT_MOVIES_KEY, (ArrayList<? extends Parcelable>) loadedMovies);
         fragment.setArguments(args);
         return fragment;
     }
@@ -79,8 +77,8 @@ public class MoviesListFragment extends Fragment {
         List<MovieResponse> moviesList = null;
         String searchText = null;
         if (getArguments() != null) {
-            moviesList = getArguments().getParcelableArrayList(MoviesListActivity.MOVIES_LIST_MOVIES_KEY);
-            searchText = getArguments().getString(MoviesListActivity.MOVIES_LIST_SEARCH_TEXT_KEY);
+            moviesList = getArguments().getParcelableArrayList(MoviesListActivity.MOVIES_LIST_FRAGMENT_MOVIES_KEY);
+            searchText = getArguments().getString(MoviesListActivity.MOVIES_LIST_FRAGMENT_SEARCH_TEXT_KEY);
         }
 
         //ViewModel
@@ -122,14 +120,14 @@ public class MoviesListFragment extends Fragment {
         });
         viewModel.movies.observe(this, loadRecyclerViewObserver);
 
-//        // card selected
-//        viewModel.selectedItem.removeObservers(this);
-//        Observer<TransferFundsSelectCardDataModel> selectCardDataModelObserver = ((@Nullable TransferFundsSelectCardDataModel selectedCard) -> {
-//            if (selectedCard != null) {
-//                selectCardInteractionListener.onCardSelected(selectedCard);
-//            }
-//        });
-//        viewModel.selectedItem.observe(this, selectCardDataModelObserver);
+        // movie selected
+        viewModel.selectedItem.removeObservers(this);
+        Observer<MoviesListItemViewModel> selectMovieDataModelObserver = ((@Nullable MoviesListItemViewModel selectedCard) -> {
+            if (selectedCard != null) {
+                listener.onGoToMovieDetails(selectedCard);
+            }
+        });
+        viewModel.selectedItem.observe(this, selectMovieDataModelObserver);
     }
     //endregion
 

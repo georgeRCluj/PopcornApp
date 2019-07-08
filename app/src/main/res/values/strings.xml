@@ -16,7 +16,7 @@
     <string name="activity_search_movie_carousel_image_description">Carousel image</string>
 
     <!-- Movies List Activity -->
-    <string name="activity_movies_list_movie_details_placeholder">PG-13 | 3h 14min | Drama, Romance | 19 July 1997 (SUA) PG-13 | 3h 14min | Drama, Romance | 19 July 1997 (</string>
+    <string name="activity_movies_list_movie_details_placeholder">PG-13 | 3h 14min | Drama, Romance | 19 July 1997 (SUA)</string>
     <string name="activity_movies_list_rate_this">Rate\nThis</string>
 
     <!--General Strings-->

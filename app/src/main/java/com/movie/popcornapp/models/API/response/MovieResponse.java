@@ -3,6 +3,8 @@ package com.movie.popcornapp.models.API.response;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import androidx.databinding.BaseObservable;
+
 import com.google.gson.annotations.SerializedName;
 
 /**
@@ -21,6 +23,9 @@ public class MovieResponse implements Parcelable {
     @SerializedName("poster_path")
     private String posterPath;
 
+    @SerializedName("backdrop_path")
+    private String backdropPath;
+
     @SerializedName("overview")
     private String overview;
 
@@ -29,6 +34,16 @@ public class MovieResponse implements Parcelable {
 
     @SerializedName("release_date")
     private String releaseDate;
+
+    public MovieResponse(String title, String releaseDate, String posterPath, String backdropPath, double averageRating, int voteCount, String overview) {
+        this.title = title;
+        this.releaseDate = releaseDate;
+        this.posterPath = posterPath;
+        this.backdropPath = backdropPath;
+        this.voteAverage = averageRating;
+        this.voteCount = voteCount;
+        this.overview = overview;
+    }
 
     //region Getters
     public double getAverageRating() {
@@ -64,6 +79,10 @@ public class MovieResponse implements Parcelable {
         return releaseDate;
     }
 
+    public String getBackdropPath() {
+        return backdropPath;
+    }
+
     //endregion
 
     //region Parcelable implementation
@@ -72,6 +91,7 @@ public class MovieResponse implements Parcelable {
         voteAverage = in.readDouble();
         title = in.readString();
         posterPath = in.readString();
+        backdropPath = in.readString();
         overview = in.readString();
         voteCount = in.readInt();
         releaseDate = in.readString();
@@ -100,6 +120,7 @@ public class MovieResponse implements Parcelable {
         dest.writeDouble(voteAverage);
         dest.writeString(title);
         dest.writeString(posterPath);
+        dest.writeString(backdropPath);
         dest.writeString(overview);
         dest.writeInt(voteCount);
         dest.writeString(releaseDate);

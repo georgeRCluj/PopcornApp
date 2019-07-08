@@ -14,10 +14,20 @@ import com.squareup.picasso.Picasso;
  */
 public class ImageViewBindingExtensions {
 
-    @BindingAdapter("imageUrlLoad")
-    public static void loadImageUrl(ImageView imageView, String url) {
+    @BindingAdapter("imageUrlLoad185")
+    public static void loadImageUrl185(ImageView imageView, String url) {
         if (url != null && !url.isEmpty()) {
-        String finalUrl = BuildConfig.TheMovieDBPosteW185 + url;
+        String finalUrl = BuildConfig.TheMovieDBPosterW185 + url;
+            Picasso.get()
+                    .load(finalUrl)
+                    .into(imageView);
+        }
+    }
+
+    @BindingAdapter("imageUrlLoad500")
+    public static void loadImageUrl500(ImageView imageView, String url) {
+        if (url != null && !url.isEmpty()) {
+            String finalUrl = BuildConfig.TheMovieDBPosterW500 + url;
             Picasso.get()
                     .load(finalUrl)
                     .into(imageView);

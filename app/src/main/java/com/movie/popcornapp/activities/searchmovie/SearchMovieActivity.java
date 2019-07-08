@@ -2,7 +2,6 @@ package com.movie.popcornapp.activities.searchmovie;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.view.Gravity;
 
 import androidx.annotation.Nullable;
@@ -15,8 +14,6 @@ import com.movie.popcornapp.databinding.ActivitySearchMovieBinding;
 import com.movie.popcornapp.extensions.ActivityUtils;
 import com.movie.popcornapp.extensions.AnimationUtils;
 import com.movie.popcornapp.models.API.response.SearchMoviesResponse;
-
-import java.util.ArrayList;
 
 /**
  * @author george.radu on 2019-07-07.
