@@ -11,4 +11,8 @@
     <string name="activity_search_movie_find">Find\u0020</string>
     <string name="activity_search_movie_the_movie">the movie</string>
     <string name="trending_movies">Trending movies</string>
+
+    <!--General Strings-->
+    <string name="no_internet_connection_dialog_message">Please check your internet connection and try again</string>
+    <string name="dialog_general_error_response_message">Error. Please try again later</string>
 </resources>

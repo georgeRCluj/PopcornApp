@@ -1,6 +1,5 @@
 package com.movie.popcornapp.activities.searchmovie;
 
-import android.app.Activity;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
@@ -46,7 +45,7 @@ class MoviesCarouselAdapter extends RecyclerView.Adapter {
     public class MoviesCarouselViewHolder extends RecyclerView.ViewHolder {
         private ItemCarouselBinding binding;
 
-        public MoviesCarouselViewHolder(ItemCarouselBinding binding) {
+        MoviesCarouselViewHolder(ItemCarouselBinding binding) {
             super(binding.getRoot());
             this.binding = binding;
         }

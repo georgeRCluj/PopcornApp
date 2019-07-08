@@ -11,11 +11,14 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.movie.popcornapp.R;
 import com.movie.popcornapp.databinding.FragmentSearchMovieBinding;
 import com.movie.popcornapp.extensions.KeyboardUtils;
+import com.movie.popcornapp.infrastructure.factories.ViewModelFactory;
+import com.movie.popcornapp.workers.searchmovies.SearchMoviesWorker;
 
 import java.util.ArrayList;
 
@@ -26,6 +29,7 @@ public class SearchMovieFragment extends Fragment {
 
     //region Properties
     private FragmentSearchMovieBinding binding;
+    private SearchMovieViewModel viewModel;
     //endregion
 
     //region Lifecycle
@@ -47,7 +51,7 @@ public class SearchMovieFragment extends Fragment {
         //Adjust edit field behavior
         adjustSearchField();
 
-        // Load carousel
+        // Populate carousel list & load carousel on UI
         ArrayList<Integer> moviesList = new ArrayList<>();
         moviesList.add(R.drawable.solo_star_wars);
         moviesList.add(R.drawable.the_meg);
@@ -59,6 +63,16 @@ public class SearchMovieFragment extends Fragment {
         binding.trendingMoviesRecyclerView.setLayoutManager(moviesCarouselLayoutManager);
         binding.trendingMoviesRecyclerView.setHasFixedSize(true);
         binding.trendingMoviesRecyclerView.setAdapter(new MoviesCarouselAdapter(moviesList));
+
+        // Workers
+        SearchMoviesWorker searchMoviesWorker = new SearchMoviesWorker(getString(R.string.no_internet_connection_dialog_message));
+
+        // Manage Tasks Repository
+        SearchMoviesTasksRepository searchMoviesTasksRepository = new SearchMoviesTasksRepository(searchMoviesWorker);
+
+        //ViewModel
+        viewModel = ViewModelProviders.of(this, new ViewModelFactory(searchMoviesTasksRepository)).get(SearchMovieViewModel.class);
+        binding.setViewModel(viewModel);
 
     }
     //endregion
