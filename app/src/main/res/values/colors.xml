@@ -9,4 +9,6 @@
     <color name="colorWhite">@android:color/white</color>
     <color name="colorLightGray">#B2B1B3</color>
 
+    <color name="colorLightGrayButtonPressed">#e4e3e6</color>
+
 </resources>

@@ -11,6 +11,8 @@
     <dimen name="text_size_very_very_small">8sp</dimen>
 
     <!-- Margins and paddings -->
+    <dimen name="margins_padding_medium">10dp</dimen>
+    <dimen name="margins_padding_small">5dp</dimen>
     <dimen name="margins_left_right_text_input">25dp</dimen>
     <dimen name="toolbar_left_margin_to_icon">30dp</dimen>
 

@@ -15,6 +15,10 @@
     <string name="activity_search_movie_no_movie_found">No movie found with this title</string>
     <string name="activity_search_movie_carousel_image_description">Carousel image</string>
 
+    <!-- Movies List Activity -->
+    <string name="activity_movies_list_movie_details_placeholder">PG-13 | 3h 14min | Drama, Romance | 19 July 1997 (SUA) PG-13 | 3h 14min | Drama, Romance | 19 July 1997 (</string>
+    <string name="activity_movies_list_rate_this">Rate\nThis</string>
+
     <!--General Strings-->
     <string name="loading_progress_dialog_message_please_wait">Please wait. Loading&#8230;</string>
     <string name="no_internet_connection_dialog_message">Please check your internet connection and try again</string>
