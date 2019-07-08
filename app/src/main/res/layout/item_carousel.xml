@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="5dp"
+        app:cardElevation="2dp">
+
+        <ImageView
+            android:id="@+id/carouselItem"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:src="@drawable/solo_star_wars"/>
+
+    </androidx.cardview.widget.CardView>
+
+</layout>
