@@ -1,6 +1,8 @@
 package com.movie.popcornapp.activities.searchmovie;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.view.Gravity;
 
 import androidx.annotation.Nullable;
@@ -8,14 +10,20 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 
 import com.movie.popcornapp.R;
+import com.movie.popcornapp.activities.movieslist.MoviesListActivity;
 import com.movie.popcornapp.databinding.ActivitySearchMovieBinding;
 import com.movie.popcornapp.extensions.ActivityUtils;
 import com.movie.popcornapp.extensions.AnimationUtils;
+import com.movie.popcornapp.models.API.response.SearchMoviesResponse;
+
+import java.util.ArrayList;
 
 /**
  * @author george.radu on 2019-07-07.
  */
-public class SearchMovieActivity extends AppCompatActivity {
+public class SearchMovieActivity extends AppCompatActivity implements SearchMovieFragment.OnSearchMovieFragmentInteractionListener {
+
+    static final String SEARCH_MOVIE_FOUND_MOVIES_LIST_KEY = "search_movie_found_movies_list_key";
 
     //region Lifecycle
     @Override
@@ -44,4 +52,14 @@ public class SearchMovieActivity extends AppCompatActivity {
         }
     }
     //endregion
+
+    //region SearchMovieFragment.OnSearchMovieFragmentInteractionListener interface
+    @Override
+    public void onGoToMoviesList(SearchMoviesResponse searchMoviesResponse) {
+        startActivity(new Intent(this, MoviesListActivity.class)
+                .putParcelableArrayListExtra(SEARCH_MOVIE_FOUND_MOVIES_LIST_KEY, searchMoviesResponse.getMoviesResponse())
+        );
+    }
+    //endregion
+
 }

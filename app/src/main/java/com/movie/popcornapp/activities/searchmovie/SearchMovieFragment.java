@@ -1,5 +1,6 @@
 package com.movie.popcornapp.activities.searchmovie;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -23,6 +24,7 @@ import com.movie.popcornapp.extensions.KeyboardUtils;
 import com.movie.popcornapp.extensions.LoadingProgressDialog;
 import com.movie.popcornapp.extensions.StringUtils;
 import com.movie.popcornapp.infrastructure.factories.ViewModelFactory;
+import com.movie.popcornapp.models.API.response.SearchMoviesResponse;
 import com.movie.popcornapp.workers.searchmovies.SearchMoviesWorker;
 
 import java.util.ArrayList;
@@ -31,8 +33,18 @@ import java.util.ArrayList;
  * @author george.radu on 2019-07-08.
  */
 public class SearchMovieFragment extends Fragment {
+    /**
+     * OnSearchMovieFragmentInteractionListener
+     */
+    public interface OnSearchMovieFragmentInteractionListener {
+        /**
+         * Go to Movies List (results of search)
+         */
+        void onGoToMoviesList(SearchMoviesResponse searchMoviesResponse);
+    }
 
     //region Properties
+    private OnSearchMovieFragmentInteractionListener listener;
     private FragmentSearchMovieBinding binding;
     private SearchMovieViewModel viewModel;
     private LoadingProgressDialog loadingProgressDialog;
@@ -90,6 +102,24 @@ public class SearchMovieFragment extends Fragment {
 
         //Setup observers
         setupObservers();
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+
+        if (context instanceof OnSearchMovieFragmentInteractionListener) {
+            listener = (OnSearchMovieFragmentInteractionListener) context;
+        } else {
+            throw new RuntimeException(context.toString() + " must implement OnSearchMovieFragmentInteractionListener");
+        }
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+
+        listener = null;
     }
     //endregion
 
@@ -182,6 +212,20 @@ public class SearchMovieFragment extends Fragment {
             }
         });
         viewModel.validationErrorDialogCommand.observe(this, displayErrorMessageResourceIdObserver);
+
+        // successful search - go to movies list
+        viewModel.navigationCommands.removeObservers(this);
+        Observer<SearchMovieViewModel.SearchMovieNavigationCommand> searchMoviesFragmentNavigationCommandObserver = ((@Nullable SearchMovieViewModel.SearchMovieNavigationCommand searchMovieNavigationCommand) -> {
+            if (searchMovieNavigationCommand != null) {
+                switch (searchMovieNavigationCommand.command) {
+                    case navigateToMovies:
+                        listener.onGoToMoviesList(searchMovieNavigationCommand.movieResponse);
+                        break;
+                }
+
+            }
+        });
+        viewModel.navigationCommands.observe(this, searchMoviesFragmentNavigationCommandObserver);
     }
     //endregion
 }

@@ -1,10 +1,15 @@
 package com.movie.popcornapp.activities.searchmovie;
 
+import androidx.annotation.NonNull;
 import androidx.databinding.ObservableField;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.movie.popcornapp.components.LoadingCommandAndMessage;
+import com.movie.popcornapp.models.API.response.MovieResponse;
+import com.movie.popcornapp.models.API.response.SearchMoviesResponse;
+
+import java.util.List;
 
 /**
  * @author george.radu on 2019-07-08.
@@ -25,6 +30,24 @@ public class SearchMovieViewModel extends ViewModel {
     public MutableLiveData<String> validationErrorDialogCommand = new MutableLiveData<>();
     //endregion;
 
+    //region Navigation commands
+    public MutableLiveData<SearchMovieNavigationCommand> navigationCommands = new MutableLiveData<>();
+
+    public enum NavigationCommand {
+        navigateToMovies
+    }
+
+    public class SearchMovieNavigationCommand {
+        public @NonNull
+        NavigationCommand command;
+        SearchMoviesResponse movieResponse;
+
+        SearchMovieNavigationCommand(@NonNull NavigationCommand command, SearchMoviesResponse searchMoviesResponse) {
+            this.command = command;
+            this.movieResponse = searchMoviesResponse;
+        }
+    }
+    //endregion
     public SearchMovieViewModel(SearchMovieTasksRepositoryInterface searchMovieTasksRepositoryInterface, SearchMovieDataModel searchMovieDataModel) {
         this.searchMovieTasksRepositoryInterface = searchMovieTasksRepositoryInterface;
         this.searchMovieDataModel = searchMovieDataModel;
@@ -47,6 +70,7 @@ public class SearchMovieViewModel extends ViewModel {
                     if (success && data != null) {
                         if (data.getMoviesResponse().size() > 0) {
                             successDialogCommand.postValue(true);
+                            navigationCommands.postValue(new SearchMovieNavigationCommand(NavigationCommand.navigateToMovies, data));
                         } else {
                             errorDialogCommand.postValue(searchMovieDataModel.getNoMovieFoundErrorMessage());
                         }
