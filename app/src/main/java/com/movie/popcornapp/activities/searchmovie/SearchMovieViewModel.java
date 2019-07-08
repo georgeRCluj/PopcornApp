@@ -40,14 +40,17 @@ public class SearchMovieViewModel extends ViewModel {
     public class SearchMovieNavigationCommand {
         public @NonNull
         NavigationCommand command;
+        String searchText;
         SearchMoviesResponse movieResponse;
 
-        SearchMovieNavigationCommand(@NonNull NavigationCommand command, SearchMoviesResponse searchMoviesResponse) {
+        SearchMovieNavigationCommand(@NonNull NavigationCommand command, String searchText, SearchMoviesResponse searchMoviesResponse) {
             this.command = command;
+            this.searchText = searchText;
             this.movieResponse = searchMoviesResponse;
         }
     }
     //endregion
+
     public SearchMovieViewModel(SearchMovieTasksRepositoryInterface searchMovieTasksRepositoryInterface, SearchMovieDataModel searchMovieDataModel) {
         this.searchMovieTasksRepositoryInterface = searchMovieTasksRepositoryInterface;
         this.searchMovieDataModel = searchMovieDataModel;
@@ -70,7 +73,7 @@ public class SearchMovieViewModel extends ViewModel {
                     if (success && data != null) {
                         if (data.getMoviesResponse().size() > 0) {
                             successDialogCommand.postValue(true);
-                            navigationCommands.postValue(new SearchMovieNavigationCommand(NavigationCommand.navigateToMovies, data));
+                            navigationCommands.postValue(new SearchMovieNavigationCommand(NavigationCommand.navigateToMovies, movieEditText.get().trim(), data));
                         } else {
                             errorDialogCommand.postValue(searchMovieDataModel.getNoMovieFoundErrorMessage());
                         }

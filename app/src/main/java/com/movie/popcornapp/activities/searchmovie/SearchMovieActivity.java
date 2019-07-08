@@ -24,6 +24,7 @@ import java.util.ArrayList;
 public class SearchMovieActivity extends AppCompatActivity implements SearchMovieFragment.OnSearchMovieFragmentInteractionListener {
 
     public static final String SEARCH_MOVIE_FOUND_MOVIES_LIST_KEY = "search_movie_found_movies_list_key";
+    public static final String SEARCH_MOVIE_SEARCH_TEXT_KEY = "search_movie_search_text_key";
 
     //region Lifecycle
     @Override
@@ -36,6 +37,12 @@ public class SearchMovieActivity extends AppCompatActivity implements SearchMovi
 
         //Initial View (fragment)
         findOrCreateViewFragment(binding);
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finishAffinity(); // if the users hit back, we do not want them to see the splash screen again, so we destroy it also
     }
     //endregion
 
@@ -55,8 +62,9 @@ public class SearchMovieActivity extends AppCompatActivity implements SearchMovi
 
     //region SearchMovieFragment.OnSearchMovieFragmentInteractionListener interface
     @Override
-    public void onGoToMoviesList(SearchMoviesResponse searchMoviesResponse) {
+    public void onGoToMoviesList(String searchText, SearchMoviesResponse searchMoviesResponse) {
         startActivity(new Intent(this, MoviesListActivity.class)
+                .putExtra(SEARCH_MOVIE_SEARCH_TEXT_KEY, searchText)
                 .putParcelableArrayListExtra(SEARCH_MOVIE_FOUND_MOVIES_LIST_KEY, searchMoviesResponse.getMoviesResponse())
         );
     }

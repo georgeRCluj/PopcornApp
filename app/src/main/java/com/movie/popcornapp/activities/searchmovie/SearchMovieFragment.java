@@ -40,7 +40,7 @@ public class SearchMovieFragment extends Fragment {
         /**
          * Go to Movies List (results of search)
          */
-        void onGoToMoviesList(SearchMoviesResponse searchMoviesResponse);
+        void onGoToMoviesList(String searchText, SearchMoviesResponse searchMoviesResponse);
     }
 
     //region Properties
@@ -80,9 +80,6 @@ public class SearchMovieFragment extends Fragment {
         moviesList.add(R.drawable.the_purge);
         moviesList.add(R.drawable.truth_or_dare);
 
-        LinearLayoutManager moviesCarouselLayoutManager = new LinearLayoutManager(getActivity());
-        moviesCarouselLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
-        binding.trendingMoviesRecyclerView.setLayoutManager(moviesCarouselLayoutManager);
         binding.trendingMoviesRecyclerView.setHasFixedSize(true);
         binding.trendingMoviesRecyclerView.setAdapter(new MoviesCarouselAdapter(moviesList));
 
@@ -220,7 +217,7 @@ public class SearchMovieFragment extends Fragment {
                 switch (searchMovieNavigationCommand.command) {
                     case navigateToMovies:
                         KeyboardUtils.showKeyboard(getActivity(), binding.searchMovieEditText, false);
-                        listener.onGoToMoviesList(searchMovieNavigationCommand.movieResponse);
+                        listener.onGoToMoviesList(searchMovieNavigationCommand.searchText, searchMovieNavigationCommand.movieResponse);
                         break;
                 }
 

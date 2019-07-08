@@ -39,7 +39,6 @@ public class SplashScreenActivity extends AppCompatActivity {
                     ActivityOptions.makeSceneTransitionAnimation(SplashScreenActivity.this).toBundle() // enable animation on transition
             );
             overridePendingTransition(0, 0);
-            finish(); // if the users hit back, we do not want them to see the splash screen again
         }, SPLASH_SCREEN_DELAY_IN_MILLIS);
     }
     //endregion

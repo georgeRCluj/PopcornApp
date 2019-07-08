@@ -8,6 +8,7 @@
 
     <!-- Margins and paddings -->
     <dimen name="margins_left_right_text_input">25dp</dimen>
+    <dimen name="toolbar_left_margin_to_icon">30dp</dimen>
 
 
 </resources>
