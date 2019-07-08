@@ -9,6 +9,9 @@ import com.google.gson.annotations.SerializedName;
  * @author george.radu on 2019-07-08.
  */
 public class MovieResponse implements Parcelable {
+    @SerializedName("id")
+    private int id;
+
     @SerializedName("vote_average")
     private double voteAverage;
 
@@ -43,6 +46,10 @@ public class MovieResponse implements Parcelable {
 
     public int getVoteCount() {
         return voteCount;
+    }
+
+    public int getId() {
+        return id;
     }
     //endregion
 

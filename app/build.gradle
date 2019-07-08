@@ -25,6 +25,7 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
             buildConfigField 'String', 'Endpoint', '"https://api.themoviedb.org"'
             buildConfigField 'String', 'TheMovieDBApiKey', '"d34b703c1b948da28c1c4eed006b1256"'
+            buildConfigField 'String', 'TheMovieDBPosteW185', '"http://image.tmdb.org/t/p/w185/"'
         }
     }
 

@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.movie.popcornapp.R;
@@ -38,6 +39,7 @@ public class MoviesListFragment extends Fragment {
     private OnMoviesListFragmentInteractionListener listener;
     private FragmentMoviesListBinding binding;
     private MoviesListViewModel viewModel;
+    private MoviesListAdapter moviesAdapter;
     //endregion
 
     //region Lifecycle
@@ -61,6 +63,15 @@ public class MoviesListFragment extends Fragment {
     }
 
     @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        //Setup movies adapter
+        moviesAdapter = new MoviesListAdapter();
+        binding.foundMoviesRecyclerView.setAdapter(moviesAdapter);
+    }
+
+    @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
@@ -76,6 +87,9 @@ public class MoviesListFragment extends Fragment {
         MoviesListDataModel moviesListDataModel = new MoviesListDataModel(searchText, moviesList);
         viewModel = ViewModelProviders.of(this, new ViewModelFactory(null, moviesListDataModel)).get(MoviesListViewModel.class);
         binding.setViewModel(viewModel);
+
+        // Setup observers
+        setupObservers();
     }
 
     @Override
@@ -94,6 +108,28 @@ public class MoviesListFragment extends Fragment {
         super.onDetach();
 
         listener = null;
+    }
+    //endregion
+
+    //region Observers
+    private void setupObservers() {
+        // adapter
+        viewModel.movies.removeObservers(this);
+        Observer<List<MoviesListItemViewModel>> loadRecyclerViewObserver = ((@Nullable List<MoviesListItemViewModel> movies) -> {
+            if (movies != null) {
+                moviesAdapter.submitList(movies);
+            }
+        });
+        viewModel.movies.observe(this, loadRecyclerViewObserver);
+
+//        // card selected
+//        viewModel.selectedItem.removeObservers(this);
+//        Observer<TransferFundsSelectCardDataModel> selectCardDataModelObserver = ((@Nullable TransferFundsSelectCardDataModel selectedCard) -> {
+//            if (selectedCard != null) {
+//                selectCardInteractionListener.onCardSelected(selectedCard);
+//            }
+//        });
+//        viewModel.selectedItem.observe(this, selectCardDataModelObserver);
     }
     //endregion
 

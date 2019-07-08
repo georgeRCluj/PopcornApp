@@ -3,8 +3,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
-
-
         <variable
             name="viewModel"
             type="com.movie.popcornapp.activities.movieslist.MoviesListViewModel" />
@@ -20,7 +18,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="50dp"
             android:layout_marginTop="20dp"
-            android:layout_marginBottom="21dp"
+            android:layout_marginBottom="20dp"
             android:fontFamily="@font/lato_latin_light"
             android:text="@{viewModel.searchText}"
             android:letterSpacing="0.2"
@@ -37,9 +35,9 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_marginStart="50dp"
-            android:layout_marginTop="10dp"
             android:layout_marginEnd="@dimen/margins_left_right_text_input"
             android:orientation="vertical"
+            android:background="@android:color/transparent"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
