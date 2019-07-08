@@ -219,6 +219,7 @@ public class SearchMovieFragment extends Fragment {
             if (searchMovieNavigationCommand != null) {
                 switch (searchMovieNavigationCommand.command) {
                     case navigateToMovies:
+                        KeyboardUtils.showKeyboard(getActivity(), binding.searchMovieEditText, false);
                         listener.onGoToMoviesList(searchMovieNavigationCommand.movieResponse);
                         break;
                 }

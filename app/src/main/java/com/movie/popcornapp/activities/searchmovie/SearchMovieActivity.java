@@ -23,7 +23,7 @@ import java.util.ArrayList;
  */
 public class SearchMovieActivity extends AppCompatActivity implements SearchMovieFragment.OnSearchMovieFragmentInteractionListener {
 
-    static final String SEARCH_MOVIE_FOUND_MOVIES_LIST_KEY = "search_movie_found_movies_list_key";
+    public static final String SEARCH_MOVIE_FOUND_MOVIES_LIST_KEY = "search_movie_found_movies_list_key";
 
     //region Lifecycle
     @Override
