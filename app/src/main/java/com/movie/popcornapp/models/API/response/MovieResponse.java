@@ -27,8 +27,11 @@ public class MovieResponse implements Parcelable {
     @SerializedName("vote_count")
     private int voteCount;
 
+    @SerializedName("release_date")
+    private String releaseDate;
+
     //region Getters
-    public double getVoteAverage() {
+    public double getAverageRating() {
         return voteAverage;
     }
 
@@ -51,15 +54,27 @@ public class MovieResponse implements Parcelable {
     public int getId() {
         return id;
     }
+
+    public int getReleaseYear() {
+        String dateComponents[] = releaseDate.split("-");
+        return Integer.parseInt(dateComponents[0]);
+    }
+
+    public String getReleaseDate() {
+        return releaseDate;
+    }
+
     //endregion
 
     //region Parcelable implementation
     protected MovieResponse(Parcel in) {
+        id = in.readInt();
         voteAverage = in.readDouble();
         title = in.readString();
         posterPath = in.readString();
         overview = in.readString();
         voteCount = in.readInt();
+        releaseDate = in.readString();
     }
 
     public static final Creator<MovieResponse> CREATOR = new Creator<MovieResponse>() {
@@ -81,11 +96,13 @@ public class MovieResponse implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(id);
         dest.writeDouble(voteAverage);
         dest.writeString(title);
         dest.writeString(posterPath);
         dest.writeString(overview);
         dest.writeInt(voteCount);
+        dest.writeString(releaseDate);
     }
     //endregion
 }

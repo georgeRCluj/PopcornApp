@@ -13,21 +13,156 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="120dp"
+        android:layout_marginBottom="20dp"
         android:background="@color/colorWhite"
         app:cardCornerRadius="1dp"
-        card_view:cardElevation="5dp"
-        android:layout_marginBottom="20dp">
+        card_view:cardElevation="5dp">
 
         <ImageView
             android:id="@+id/movieImage"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            app:imageUrlLoad="@{viewModel.url}"
             android:scaleType="centerCrop"
+            app:imageUrlLoad="@{viewModel.url}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintWidth_percent="0.3" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/centerHorizontalGuideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_begin="60dp" />
+
+        <TextView
+            android:id="@+id/movieTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="8dp"
+            android:fontFamily="@font/lato_latin_light"
+            android:lines="1"
+            android:text="@{viewModel.title}"
+            android:textColor="@color/colorBlack"
+            android:textSize="@dimen/text_size_medium"
+            app:layout_constraintBottom_toTopOf="@+id/centerHorizontalGuideline"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_weight="1"
+            app:layout_constraintStart_toEndOf="@id/movieImage" />
+
+        <TextView
+            android:id="@+id/movieYear"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:fontFamily="@font/lato_latin_light"
+            android:text="@{viewModel.year}"
+            android:textColor="@color/colorLightGray"
+            android:textSize="@dimen/text_size_medium"
+            app:layout_constraintStart_toEndOf="@id/movieImage"
+            app:layout_constraintTop_toBottomOf="@+id/centerHorizontalGuideline" />
+
+        <TextView
+            android:id="@+id/rateThis"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:fontFamily="@font/lato_latin_light"
+            android:gravity="center"
+            android:text="Rate\nThis"
+            android:textColor="@color/colorLightGray"
+            android:textSize="@dimen/text_size_very_small"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/emptyStar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="5dp"
+            android:src="@drawable/empty_star"
+            app:layout_constraintBottom_toBottomOf="@+id/rateThis"
+            app:layout_constraintEnd_toStartOf="@id/rateThis"
+            app:layout_constraintTop_toTopOf="@+id/rateThis" />
+
+        <View
+            android:id="@+id/ratingDivider"
+            android:layout_width="1dp"
+            android:layout_height="25dp"
+            android:layout_marginRight="5dp"
+            android:background="@color/colorLightGray"
+            app:layout_constraintBottom_toBottomOf="@+id/emptyStar"
+            app:layout_constraintEnd_toStartOf="@id/emptyStar"
+            app:layout_constraintTop_toTopOf="@+id/emptyStar" />
+
+        <TextView
+            android:id="@+id/outOfTen"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="5dp"
+            android:fontFamily="@font/lato_latin_light"
+            android:text="/10"
+            android:textColor="@color/colorLightGray"
+            android:textSize="@dimen/text_size_very_small"
+            app:layout_constraintEnd_toStartOf="@id/ratingDivider"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/averageRating"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="2dp"
+            android:fontFamily="@font/lato_latin_light_font"
+            android:text="@{viewModel.averageRating}"
+            android:textColor="@color/colorBlack"
+            android:textSize="@dimen/text_size_very_small_average"
+            app:layout_constraintBaseline_toBaselineOf="@id/outOfTen"
+            app:layout_constraintEnd_toStartOf="@id/outOfTen" />
+
+        <ImageView
+            android:id="@+id/yellowStar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="2dp"
+            android:src="@drawable/yellow_star"
+            app:layout_constraintBottom_toBottomOf="@+id/emptyStar"
+            app:layout_constraintEnd_toStartOf="@id/averageRating"
+            app:layout_constraintTop_toTopOf="@+id/emptyStar" />
+
+        <TextView
+            android:id="@+id/votesCount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="10dp"
+            android:fontFamily="@font/lato_latin_light"
+            android:gravity="center"
+            android:text="@{viewModel.voteCount}"
+            android:textColor="@color/colorLightGray"
+            android:textSize="@dimen/text_size_very_very_small"
+            app:layout_constraintStart_toStartOf="@id/averageRating"
+            app:layout_constraintTop_toBottomOf="@id/averageRating" />
+
+        <TextView
+            android:id="@+id/otherInfo"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="5dp"
+            android:fontFamily="@font/lato_latin_light"
+            android:maxLines="2"
+            android:text="PG-13 | 3h 14min | Drama, Romance | 19 July 1997 (SUA) PG-13 | 3h 14min | Drama, Romance | 19 July 1997 ("
+            android:textColor="@color/colorLightGray"
+            android:textSize="@dimen/text_size_very_very_small"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_weight="1"
+            app:layout_constraintStart_toStartOf="@id/movieYear"
+            app:layout_constraintTop_toBottomOf="@id/movieYear" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

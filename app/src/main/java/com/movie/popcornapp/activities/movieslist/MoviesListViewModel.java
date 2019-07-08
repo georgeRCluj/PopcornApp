@@ -12,7 +12,7 @@ import java.util.List;
 /**
  * @author george.radu on 2019-07-08.
  */
-public class MoviesListViewModel extends ViewModel implements MoviesListItemViewModelInterface{
+public class MoviesListViewModel extends ViewModel implements MoviesListItemViewModelInterface {
 
     private MoviesListDataModel moviesListDataModel;
 
@@ -36,7 +36,9 @@ public class MoviesListViewModel extends ViewModel implements MoviesListItemView
     private void loadMovies() {
         List<MoviesListItemViewModel> list = new ArrayList<>();
         for (MovieResponse movie : moviesListDataModel.getMoviesList()) {
-            list.add(new MoviesListItemViewModel(movie.getId(), movie.getPosterPath(), movie.getTitle() ,2000, this));
+            if (movie.getReleaseDate().length() > 0 && movie.getPosterPath() != null) {
+                list.add(new MoviesListItemViewModel(movie.getId(), movie.getPosterPath(), movie.getTitle(), movie.getReleaseYear(), movie.getAverageRating(), movie.getVoteCount(), this));
+            }
         }
         movies.postValue(list);
     }

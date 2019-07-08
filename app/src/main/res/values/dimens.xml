@@ -5,6 +5,10 @@
     <dimen name="text_size_very_large">35sp</dimen>
     <dimen name="text_size_large">25sp</dimen>
     <dimen name="text_size_medium">20sp</dimen>
+    <dimen name="text_size_small">15sp</dimen>
+    <dimen name="text_size_very_small_average">12sp</dimen>
+    <dimen name="text_size_very_small">10sp</dimen>
+    <dimen name="text_size_very_very_small">8sp</dimen>
 
     <!-- Margins and paddings -->
     <dimen name="margins_left_right_text_input">25dp</dimen>
