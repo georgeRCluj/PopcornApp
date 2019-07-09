@@ -16,7 +16,6 @@ public class CustomAlertDialog extends android.app.AlertDialog {
     private CustomAlertDialogInterface mCustomAlertDialogInterface;
     //endregion;
 
-
     //region Lifecycle
     public CustomAlertDialog(Context context,
                              String title,

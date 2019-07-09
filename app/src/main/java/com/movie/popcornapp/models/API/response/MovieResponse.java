@@ -3,8 +3,6 @@ package com.movie.popcornapp.models.API.response;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import androidx.databinding.BaseObservable;
-
 import com.google.gson.annotations.SerializedName;
 
 /**

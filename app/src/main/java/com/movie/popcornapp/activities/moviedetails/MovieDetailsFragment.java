@@ -12,9 +12,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.movie.popcornapp.R;
-import com.movie.popcornapp.activities.movieslist.MoviesListViewModel;
 import com.movie.popcornapp.databinding.FragmentMovieDetailsBinding;
-import com.movie.popcornapp.databinding.FragmentMoviesListBinding;
 import com.movie.popcornapp.infrastructure.factories.ViewModelFactory;
 import com.movie.popcornapp.models.API.response.MovieResponse;
 
@@ -60,7 +58,6 @@ public class MovieDetailsFragment extends Fragment {
 
         MovieDetailsViewModel viewModel = ViewModelProviders.of(this, new ViewModelFactory(null, selectedMovie)).get(MovieDetailsViewModel.class);
         binding.setViewModel(viewModel);
-
     }
     //endregion
 }

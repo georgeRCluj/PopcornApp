@@ -181,8 +181,6 @@
                 app:layout_constraintBottom_toTopOf="@+id/trendingMoviesRecyclerView"
                 app:layout_constraintStart_toStartOf="parent" />
 
-
         </androidx.constraintlayout.widget.ConstraintLayout>
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

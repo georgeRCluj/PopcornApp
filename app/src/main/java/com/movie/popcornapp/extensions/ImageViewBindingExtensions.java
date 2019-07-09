@@ -5,8 +5,6 @@ import android.widget.ImageView;
 import androidx.databinding.BindingAdapter;
 
 import com.movie.popcornapp.BuildConfig;
-import com.movie.popcornapp.R;
-import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
 /**

@@ -168,5 +168,4 @@
             app:layout_constraintTop_toBottomOf="@id/movieYear" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
 </layout>

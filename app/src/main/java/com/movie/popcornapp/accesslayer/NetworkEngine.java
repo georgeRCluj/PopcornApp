@@ -21,7 +21,6 @@ import retrofit.mime.TypedByteArray;
  */
 public class NetworkEngine {
 
-
     //region Properties
     private static final String ENDPOINT_URL = BuildConfig.Endpoint;
 
