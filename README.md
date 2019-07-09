@@ -84,3 +84,8 @@ The code is split into packages with the following structure:
 * I have used dataBinding also in recyclerViews. Also, I have used in adapters the Diff.Util implementation, for optimisation and speed on the recyclerView.
 * I have used Parcelable instead of Serializable, to transfer objects from one activity to other, since Serializable uses reflection (being part of Java libraries) and costs more memory than Parcelable, which is Android specific method.
 * The carousel in the Search Screen has just static images.
+
+## Development timeframe
+* The app took approx 22 hours to develop
+* Unit tests took approx 1.5 hours
+* Documentation and videos took approx 1.5 hours
