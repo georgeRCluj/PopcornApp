@@ -15,7 +15,7 @@ In this project I have used several design patterns and components that will be 
 * Used permissions for internet
 * All activities are blocked in portrait mode and screen is blocked at keyboard showing up or hiding.
 * Custom App class is used
-* Network security config inserted because of rendering problems in Picasso.
+* Network security config inserted because of rendering problems in Picasso on devices with Android 8.0 and newer.
 
 ## Project setup
 * Project is using AndroidX libraries and approach.
