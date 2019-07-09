@@ -2,9 +2,14 @@
 
 ----
 ## About
-This is search engine for movies, composed of 4 screens (Splash, Search, Movies list results, Movie details).
+This is a search engine for movies, composed of 4 screens (Splash, Search, Movies list results, Movie details).
 
 In this project I have used several design patterns and components that will be described below.
+
+## Validations
+* The app will show error messages if the user types an empty string
+* Also, will notify the user if there is no movie found with that title
+* An alert will appear if there is no internet connection.
 
 ## Manifest
 * Used permissions for internet
