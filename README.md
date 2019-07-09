@@ -23,7 +23,7 @@ In this project I have used several design patterns and components that will be 
 
 ## Architectural patterns:
 * I have used an MVVM + Clean Arhitecture approach: the app is split into modules (packages), one for each screen
-* I have used Android Jetpack components to accomplish achieve this purpose - LiveData, ViewModel, Databinding.
+* I have used Android Jetpack components to achieve this purpose - LiveData, ViewModel, Databinding.
 
 ## Design patterns
 * I have used the singleton pattern for Network Engine
