@@ -1,5 +1,6 @@
 package com.movie.popcornapp.models.API.response;
 
+import android.graphics.Movie;
 import android.os.Parcel;
 import android.os.Parcelable;
 
@@ -40,6 +41,10 @@ public class SearchMoviesResponse implements Parcelable {
         return moviesResponse;
     }
     //endregion
+
+    public SearchMoviesResponse(ArrayList<MovieResponse> moviesRespons) {
+        this.moviesResponse = moviesRespons;
+    }
 
     //region Parcelable interface
     @Override

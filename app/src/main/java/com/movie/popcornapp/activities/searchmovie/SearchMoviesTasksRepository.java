@@ -29,7 +29,6 @@ public class SearchMoviesTasksRepository implements SearchMovieTasksRepositoryIn
                 callback.response(false, message, null);
             }
         });
-
     }
     //endregion
 }

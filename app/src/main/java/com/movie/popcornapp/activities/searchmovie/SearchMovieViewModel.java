@@ -21,7 +21,6 @@ public class SearchMovieViewModel extends ViewModel {
     //endregion;
 
     //region Dialogs
-    public MutableLiveData<Boolean> successDialogCommand = new MutableLiveData<>();
     public MutableLiveData<String> errorDialogCommand = new MutableLiveData<>();
     public MutableLiveData<LoadingCommandAndMessage> loadingCommands = new MutableLiveData<>();
     public MutableLiveData<String> validationErrorDialogCommand = new MutableLiveData<>();
@@ -37,8 +36,8 @@ public class SearchMovieViewModel extends ViewModel {
     public class SearchMovieNavigationCommand {
         public @NonNull
         NavigationCommand command;
-        String searchText;
-        SearchMoviesResponse movieResponse;
+        public String searchText;
+        public SearchMoviesResponse movieResponse;
 
         SearchMovieNavigationCommand(@NonNull NavigationCommand command, String searchText, SearchMoviesResponse searchMoviesResponse) {
             this.command = command;
@@ -56,7 +55,7 @@ public class SearchMovieViewModel extends ViewModel {
     //region Actions
     public void searchForMovie() {
         // validation
-        if (movieEditText == null || movieEditText.get() == null || movieEditText.get().trim().length() == 0) {
+        if (movieEditText == null || movieEditText.get().trim().length() == 0) {
             String errorMessage = searchMovieDataModel.getValidationErrorMessage();
             if (errorMessage != null) {
                 validationErrorDialogCommand.postValue(errorMessage);
@@ -69,7 +68,6 @@ public class SearchMovieViewModel extends ViewModel {
                 (success, message, data) -> {
                     if (success && data != null) {
                         if (data.getMoviesResponse().size() > 0) {
-                            successDialogCommand.postValue(true);
                             navigationCommands.postValue(new SearchMovieNavigationCommand(NavigationCommand.navigateToMovies, movieEditText.get().trim(), data));
                         } else {
                             errorDialogCommand.postValue(searchMovieDataModel.getNoMovieFoundErrorMessage());

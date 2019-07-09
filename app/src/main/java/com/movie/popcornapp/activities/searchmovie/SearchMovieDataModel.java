@@ -7,7 +7,7 @@ public class SearchMovieDataModel {
     private String validationErrorMessage;
     private String movieListEmptyErrorMessage;
 
-    SearchMovieDataModel(String validationErrorMessage, String movieListEmptyErrorMessage) {
+    public SearchMovieDataModel(String validationErrorMessage, String movieListEmptyErrorMessage) {
         this.validationErrorMessage = validationErrorMessage;
         this.movieListEmptyErrorMessage = movieListEmptyErrorMessage;
     }
@@ -16,7 +16,7 @@ public class SearchMovieDataModel {
         return validationErrorMessage;
     }
 
-    String getNoMovieFoundErrorMessage() {
+    public String getNoMovieFoundErrorMessage() {
         return movieListEmptyErrorMessage;
     }
 }
