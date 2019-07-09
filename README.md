@@ -54,3 +54,27 @@ The code is split into packages with the following structure:
 * In this combination of architectures (MVVM + Clean) I perform unit tests on viewModels, tasks repositories and dataModels (where applicable).
 * In this case I have performed unit tests just on SearchMovie module, for illustration purposes, which contains also the api call (8 unit tests on viewModel and 2 on tasksRepository). Tests on other modules would be the same.
 * I am using Mockito / JUnit.
+
+## Gradle. Libraries
+* I set the project on min sdk 21, with target on 28.
+* I have two build types (debug, release), having the same data.
+* I hold some fields to use in the project with BuildConfig (apiKey etc)
+* I have enabled dataBinding.
+* I have enabled Java 8 for lambdas.
+* I use recyclerView for lists, viewModel and liveData (as stated above), GSON for json serialization / deserialzation in conjuction with Retrofit, Retrofit for networks calls, Picasso for images.
+* I like to keep all versions visible here, not centralized, to see when updates are available.
+
+## UI / UX
+* I have used especially ConstraintLayout, which gives flexibilty and avoid nested layouts and is also producing high quality UI.
+* I have used a sliding animation between activities.
+* I have used a dynamic approach on search textField in the searchMovie activity. E.g. when you empty the search edit container, the keyboard disspears and the "Find the movie" appears again (which is custom, is not an EditText hint).
+* I have used percentages, in order for the screens to adapt to as many resolutions as possible.
+* I have exported the svg assets to all 5 / 6 resolutions specific on Android.
+
+## Other observations
+* I tried as much as possbile to use compact dimensions for all layouts, saved in dimens.xml file. There are cases where the UI is very custom thus I put the dimensions directly in the xml files.
+* I separated the string to strings.file.
+* I did not implement pagination (I know that the API returns more pages, if applicable). At this moment, I am loading just the first page. This would have taken more time to implement.
+* I have used regions in the whole project, for a better code visibility and organization.
+* I have used dataBinding also in recyclerViews. Also, I have used in adapters the Diff.Util implementation, for optimisation and speed on the recyclerView.
+* I have used Parcelable instead of Serializable, to transfer objects from one activity to other, since Serializable uses reflection (being part of Java libraries) and costs more memory than Parcelable, which is Android specific method. 
