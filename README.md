@@ -86,6 +86,6 @@ The code is split into packages with the following structure:
 * The carousel in the Search Screen has just static images.
 
 ## Development timeframe
-* The app took approx 22 hours to develop
+* The app took approx 22 hours to develop (the commits show the starting point and the ending point of the app, with every stage of development).
 * Unit tests took approx 1.5 hours
 * Documentation and videos took approx 1.5 hours
