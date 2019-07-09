@@ -1,10 +1,12 @@
 package com.movie.popcornapp.extensions;
 
+import android.util.Log;
 import android.widget.ImageView;
 
 import androidx.databinding.BindingAdapter;
 
 import com.movie.popcornapp.BuildConfig;
+import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
 /**
@@ -28,7 +30,16 @@ public class ImageViewBindingExtensions {
             String finalUrl = BuildConfig.TheMovieDBPosterW500 + url;
             Picasso.get()
                     .load(finalUrl)
-                    .into(imageView);
+                    .into(imageView, new Callback() {
+                        @Override
+                        public void onSuccess() {
+                        }
+
+                        @Override
+                        public void onError(Exception e) {
+                            Log.d("Picasso_error", "onError: " + e);
+                        }
+                    });
         }
     }
 }
