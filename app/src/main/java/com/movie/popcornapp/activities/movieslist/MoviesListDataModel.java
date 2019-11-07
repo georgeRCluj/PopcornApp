@@ -21,7 +21,7 @@ public class MoviesListDataModel {
         return searchText;
     }
 
-    public List<MovieResponse> getMoviesList() {
+    List<MovieResponse> getMoviesList() {
         return moviesList;
     }
 }
