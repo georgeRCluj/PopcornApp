@@ -89,3 +89,9 @@ The code is split into packages with the following structure:
 * The app took approx 22 hours to develop (the commits show the starting point and the ending point of the app, with every stage of development).
 * Unit tests took approx 1.5 hours
 * Documentation and videos took approx 1.5 hours
+
+## Kotlin
+* Update on 7th of November 2019
+* Created branch KotlinVersion where I have migrated MovieDetails scene to Kotlin (3 classes 100% Kotlin) in approx 2 hours
+* Created branch JavaVersion with all classes 100% Java.
+* Merged into master the KotlinVersion.
