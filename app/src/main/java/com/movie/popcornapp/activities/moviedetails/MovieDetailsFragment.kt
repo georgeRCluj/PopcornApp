@@ -22,9 +22,10 @@ class MovieDetailsFragment : Fragment() {
 
         fun newInstance(selectedMovie: ArrayList<MovieResponse>): MovieDetailsFragment {
             val fragment = MovieDetailsFragment()
-            val args = Bundle()
-            args.putParcelableArrayList(MOVIE_DETAILS_FRAGMENT_SELECTED_MOVIE_KEY, selectedMovie)
-            fragment.arguments = args
+            Bundle().also {
+                it.putParcelableArrayList(MOVIE_DETAILS_FRAGMENT_SELECTED_MOVIE_KEY, selectedMovie)
+                fragment.arguments = it
+            }
             return fragment
         }
     }
@@ -41,6 +42,7 @@ class MovieDetailsFragment : Fragment() {
         // get arguments and inject in xml
         arguments?.getParcelableArrayList<MovieResponse>(MOVIE_DETAILS_FRAGMENT_SELECTED_MOVIE_KEY)!![0].also {
             ViewModelProviders.of(this, ViewModelFactory(null, it)).get(MovieDetailsViewModel::class.java).apply {
+                this.setMovieDetails()
                 binding?.viewModel = this
             }
         }
