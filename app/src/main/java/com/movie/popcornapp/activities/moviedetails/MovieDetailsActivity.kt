@@ -18,18 +18,16 @@ class MovieDetailsActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        // set layout
+        // set layout & toolbar
         AnimationUtils.setAnimation(this, Gravity.RIGHT, 400)
-        val binding = DataBindingUtil.setContentView<ActivityMovieDetailsBinding>(this, R.layout.activity_movie_details)
+        val binding = DataBindingUtil.setContentView<ActivityMovieDetailsBinding>(this, R.layout.activity_movie_details).apply {
+            setupToolbar(this)
+        }
 
-        //Customise Toolbar
-        setupToolbar(binding)
-
-        // Retrieve data from previous activity
-        val selectedMovie = intent.getParcelableArrayListExtra<MovieResponse>(MoviesListActivity.MOVIES_LIST_GO_TO_MOVIE_DETAILS_KEY)
-
-        //Initial View (fragment)
-        findOrCreateViewFragment(binding, selectedMovie)
+        // Retrieve movie from previous activity. Start first fragment
+        intent.getParcelableArrayListExtra<MovieResponse>(MoviesListActivity.MOVIES_LIST_GO_TO_MOVIE_DETAILS_KEY).apply {
+            findOrCreateViewFragment(binding, this)
+        }
     }
     //endregion
 
@@ -37,8 +35,10 @@ class MovieDetailsActivity : AppCompatActivity() {
     private fun setupToolbar(binding: ActivityMovieDetailsBinding) {
         setSupportActionBar(binding.toolbarMovieDetails)
         binding.backArrow.setOnClickListener { finish() }
-        supportActionBar?.setDisplayShowTitleEnabled(false)
-        supportActionBar?.setHomeButtonEnabled(false)
+        supportActionBar?.also {
+            it.setDisplayShowTitleEnabled(false)
+            it.setHomeButtonEnabled(false)
+        }
     }
 
     private fun findOrCreateViewFragment(binding: ActivityMovieDetailsBinding, selectedMovie: ArrayList<MovieResponse>) {
